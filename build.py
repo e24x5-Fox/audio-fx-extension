@@ -80,8 +80,8 @@ def main():
     print("Собрано «%s» v%s, файлов: %d" % (manifest.get("name", base), version, len(files)))
     for _, rel in files:
         print("   ", rel)
-    print("
-  dist/%s.zip  (%.1f КБ)  — Chrome / Edge / Яндекс / Opera" % (base, size))
+    print("")
+    print("  dist/%s.zip  (%.1f КБ)  — Chrome / Edge / Яндекс / Opera" % (base, size))
 
     if FIREFOX:
         # .xpi — тот же ZIP под другим именем, отдельная сборка не нужна.
