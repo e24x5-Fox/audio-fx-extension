@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Audio FX — Universal Sound Enhancer",
+  "version": "1.8.2",
+  "description": "Плавающая панель на странице: дисторшн, 3-полосный эквалайзер, ревёрб, дилей, тремоло, 8D, автовыравнивание громкости между треками и регулировка скорости для любого audio/video на сайте. Есть пресеты.",
+  "permissions": ["storage"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "suno-audio-fx@foxivan",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://suno.com/*", "*://*.suno.com/*"],
+      "js": ["content.js"],
+      "css": ["panel.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/toggle-icon.png"],
+      "matches": ["*://suno.com/*", "*://*.suno.com/*"]
+    }
+  ]
+}
