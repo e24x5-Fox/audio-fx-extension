@@ -1,4 +1,4 @@
-/* Audio FX — floating panel styles, палитра в духе Suno (тёмный фон + розово-
+/* Suno FX — floating panel styles, палитра в духе Suno (тёмный фон + розово-
    оранжевый градиентный акцент). Scoped под #afx-root, чтобы не течь на страницу. */
 
 #afx-root, #afx-root * {
@@ -54,7 +54,16 @@
   /* top/bottom/left/right задаются из JS (positionPanel) в зависимости от того,
      в каком углу экрана сейчас находится кружок */
   width: 264px;
+  /* На узком телефоне панель шире экрана быть не должна. */
+  max-width: calc(100vw - 16px);
+  /* Запасное значение для браузеров без dvh; ниже — с ним. Реальный потолок
+     всё равно выставляет positionPanel() в JS, по свободному месту рядом с
+     кружком: CSS не знает, сколько его осталось над/под кнопкой. */
   max-height: min(520px, calc(100vh - 80px));
+  max-height: min(520px, calc(100dvh - 80px));
+  /* Докрутив список ползунков до конца, пальцем легко «пробросить» прокрутку
+     на саму страницу — на телефоне из-за этого сайт уезжал под панелью. */
+  overscroll-behavior: contain;
   background: var(--afx-card);
   border: 1px solid var(--afx-border);
   border-radius: 16px;
@@ -66,7 +75,6 @@
   overflow-x: hidden;
 }
 #afx-panel.open { display: block; }
-#afx-header { position: sticky; top: 0; background: var(--afx-card); z-index: 1; }
 #afx-panel::before {
   content: "";
   display: block;
@@ -76,6 +84,12 @@
 }
 
 #afx-header {
+  /* Липкий, чтобы при прокрутке длинного списка ползунков крестик и «ручка»
+     для перетаскивания оставались на месте. */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--afx-card);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -118,9 +132,13 @@
   width: 100%;
   height: 4px;
   -webkit-appearance: none;
+  appearance: none;
   background: var(--afx-border);
   border-radius: 2px;
   outline: none;
+  /* Без этого палец, начавший движение чуть мимо ручки, тащит страницу, а не
+     ползунок: браузер отдаёт жест прокрутке. */
+  touch-action: none;
 }
 .afx-row input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -217,4 +235,55 @@
   color: var(--afx-text3);
   margin-top: 10px;
   text-align: center;
+}
+
+/* ── Тач-экран ────────────────────────────────────────────────────────────
+   Правила ниже включаются по типу указателя, а не по ширине экрана: телефон
+   в альбомной ориентации и планшет остаются «пальцевыми», хотя по ширине
+   выглядят как настольный браузер.
+
+   Смысл один — попадание. Ползунок высотой 4 пикселя с ручкой 14 пикселей
+   мышью берётся легко, а пальцем почти нет: промах мимо ручки на телефоне
+   означал не «сдвинуть чуть-чуть», а «промахнуться». Поэтому у ползунка
+   появляется отдельная область касания в 28 пикселей высотой, а сама полоса
+   рисуется псевдоэлементами — визуально она остаётся тонкой. */
+@media (pointer: coarse) {
+  #afx-root, #afx-toggle { width: 52px; height: 52px; }
+
+  #afx-panel { width: 288px; }
+
+  .afx-row { margin-bottom: 14px; }
+
+  .afx-row-label { font-size: 12px; }
+
+  .afx-row input[type="range"] {
+    height: 28px;            /* область касания */
+    background: transparent; /* полосу рисуют псевдоэлементы, см. ниже */
+  }
+  .afx-row input[type="range"]::-moz-range-track {
+    height: 6px;
+    background: var(--afx-border);
+    border-radius: 3px;
+  }
+  .afx-row input[type="range"]::-webkit-slider-runnable-track {
+    height: 6px;
+    background: var(--afx-border);
+    border-radius: 3px;
+  }
+  .afx-row input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; }
+  .afx-row input[type="range"]::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+    margin-top: -8px; /* ручка по центру полосы: (22 - 6) / 2 */
+  }
+
+  #afx-close { font-size: 18px; padding: 6px 12px; }
+
+  .afx-preset-controls select { height: 38px; font-size: 12px; }
+  .afx-btn.afx-btn-sm { width: 38px; height: 38px; font-size: 15px; }
+  .afx-btn { padding: 11px 0; font-size: 12px; }
+
+  /* Наведения на тач-экране нет, а «залипший» hover после нажатия выглядит
+     как будто кнопка осталась включённой. */
+  #afx-toggle:hover { transform: none; box-shadow: 0 4px 18px rgba(255, 47, 126, .35); }
 }
