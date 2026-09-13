@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suno FX — политика конфиденциальности</title>
+<style>
+  :root { --bg:#0e0e10; --card:#17171b; --line:#26262c; --text:#ececf1; --muted:#8a8a94; --accent:#8b5cf6; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text);
+         font:16px/1.65 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  .bar { height:4px; background:var(--accent); }
+  main { max-width:760px; margin:0 auto; padding:32px 20px 64px; }
+  h1 { font-size:28px; margin:24px 0 4px; }
+  h2 { font-size:19px; margin:32px 0 8px; }
+  .sub { color:var(--muted); margin:0 0 8px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:18px 0; }
+  ul { padding-left:20px; }
+  li { margin:6px 0; }
+  code { background:#000; border:1px solid var(--line); border-radius:4px; padding:1px 5px; font-size:14px; }
+  a { color:var(--accent); }
+  .en { color:var(--muted); }
+  .en h2 { color:var(--text); }
+  footer { color:var(--muted); font-size:13px; border-top:1px solid var(--line); margin-top:40px; padding-top:16px; }
+</style>
+</head>
+<body>
+<div class="bar"></div>
+<main>
+
+<h1>Suno FX</h1>
+<p class="sub">Политика конфиденциальности. Обновлено 13 сентября 2026 года.</p>
+
+<div class="card">
+  <strong>Коротко: расширение не собирает никаких данных.</strong> Оно не отправляет
+  ничего ни на серверы автора, ни куда-либо ещё, и не содержит ни аналитики, ни рекламы.
+</div>
+
+<h2>Что делает расширение</h2>
+<p>
+  Suno FX добавляет на страницы <code>suno.com</code> плавающую панель со звуковыми
+  эффектами: эквалайзер, дисторшн, ревёрб, дилей, тремоло, 8D, скорость воспроизведения и
+  выравнивание громкости. Звук обрабатывается прямо в браузере через Web Audio API,
+  на той же странице, где он играет.
+</p>
+
+<h2>Какие данные обрабатываются</h2>
+<ul>
+  <li><strong>Звук страницы.</strong> Проходит через цепочку эффектов внутри вкладки и
+      нигде не записывается, не сохраняется и не передаётся.</li>
+  <li><strong>Ваши настройки и пресеты.</strong> Положения ползунков, положение панели и
+      сохранённые вами пресеты лежат в <code>chrome.storage.local</code> — это хранилище
+      вашего браузера на вашем компьютере.</li>
+</ul>
+<p>
+  Расширение не читает содержимое страниц, не следит за историей просмотров, не
+  определяет местоположение и не запрашивает никаких сведений о вас.
+</p>
+
+<h2>Передача данных</h2>
+<p>
+  Никакой. Расширение не обращается к сети вообще: в нём нет ни одного сетевого запроса,
+  ни одного стороннего сервиса и ни одной внешней библиотеки. Данные не продаются и не
+  передаются третьим лицам, потому что данных попросту нет.
+</p>
+
+<h2>Разрешения</h2>
+<ul>
+  <li><code>storage</code> — хранить ваши настройки и пресеты между запусками браузера.</li>
+  <li>Доступ к <code>suno.com</code> — показывать панель и обрабатывать звук только на
+      этом сайте. На других сайтах расширение не работает.</li>
+</ul>
+
+<h2>Дети</h2>
+<p>Расширение не предназначено специально для детей и не собирает данные о ком бы то ни было.</p>
+
+<h2>Изменения</h2>
+<p>
+  Если политика изменится, новая версия появится на этой странице с новой датой. Исходный
+  код открыт, и любые изменения видны в истории репозитория.
+</p>
+
+<h2>Связь</h2>
+<p>
+  Вопросы и замечания — в
+  <a href="https://github.com/e24x5-Fox/audio-fx-extension/issues">разделе Issues репозитория</a>.
+</p>
+
+<div class="en">
+<h2>English summary</h2>
+<p>
+  Suno FX adds a floating audio-effects panel (equalizer, distortion, reverb, delay,
+  tremolo, 8D, playback speed, loudness levelling) to <code>suno.com</code>. Audio is
+  processed locally in the browser tab through the Web Audio API.
+</p>
+<p>
+  <strong>The extension collects no user data.</strong> It makes no network requests of any
+  kind, contains no analytics, ads or third-party code, and never transmits anything off
+  your device. Your slider settings and saved presets are kept in
+  <code>chrome.storage.local</code> on your own computer. Permissions used:
+  <code>storage</code> for those settings and host access to <code>suno.com</code> to show
+  the panel and process audio on that site only. No data is sold or shared with third
+  parties. Questions:
+  <a href="https://github.com/e24x5-Fox/audio-fx-extension/issues">GitHub Issues</a>.
+</p>
+</div>
+
+<footer>
+  Открытый исходный код:
+  <a href="https://github.com/e24x5-Fox/audio-fx-extension">github.com/e24x5-Fox/audio-fx-extension</a>
+</footer>
+
+</main>
+</body>
+</html>
